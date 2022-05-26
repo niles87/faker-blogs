@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import { Blogs } from "./components/blogs";
+import { Form } from "./components/form";
 
 function App() {
+  const [hidden, setHidden] = useState(true);
+  const openModal = () => setHidden(false);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="container">
+      <header style={{ display: "flex", justifyContent: "space-between" }}>
+        <h1>Blogs</h1>
+        <button onClick={openModal} className="btn btn-primary">
+          New Blog
+        </button>
       </header>
+      <Form isHidden={hidden} setIsHidden={setHidden} />
+      <Blogs />
     </div>
   );
 }
