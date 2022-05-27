@@ -51,7 +51,9 @@ export const Form = (props) => {
     try {
       const res = await api.createBlog(blogPost);
       const blog = await res.json();
-      console.log(blog);
+      blog.id = crypto.randomUUID(); // only need this line to stop key clashes
+      // Adding new blog to top of the rendered list in blogs component
+      props.setBlogs([blog, ...props.blogList]);
     } catch (err) {
       console.log(err);
     }

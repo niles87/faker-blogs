@@ -1,31 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { api } from "../utils/api";
+import React from "react";
 import { BlogCard } from "./blogcard";
 
 export const Blogs = (props) => {
-  const [blogs, setBlogs] = useState([]);
-
-  useEffect(() => {
-    async function getBlogs() {
-      try {
-        const res = await api.getBlogs();
-        const blogs = await res.json();
-        setBlogs(blogs.slice(0, 10));
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
-    getBlogs();
-  }, []);
-
   return (
     <div>
-      {blogs.length ? (
-        blogs.map((blog) => (
+      {/* conditional rendering check if there are any blogs then render the results*/}
+      {props.blogList?.length ? (
+        props.blogList.map((blog) => (
           <BlogCard key={blog.id} title={blog.title} body={blog.body} />
         ))
       ) : (
+        // here is where you can add a skeleton animation when waiting for data to load.
         <div>Loading...</div>
       )}
     </div>
